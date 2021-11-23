@@ -1,6 +1,11 @@
 import br.edu.ifms.pedido.ItemPedido;
 import br.edu.ifms.pedido.Pedido;
 import br.edu.ifms.pedido.ResumoPedido;
+import br.edu.ifms.pedido.desconto.CalculadorDescontoPrimeiraFaixa;
+import br.edu.ifms.pedido.desconto.CalculadoraDescontoSegundaFaixa;
+import br.edu.ifms.pedido.desconto.CalculadoraDescontoTerceiraFaixa;
+import br.edu.ifms.pedido.desconto.CalculadoraFaixaDesconto;
+import br.edu.ifms.pedido.desconto.SemDesconto;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -11,7 +16,12 @@ public class PedidoTest {
     
     @Before
     public void setup(){
-        pedido = new Pedido();
+        CalculadoraFaixaDesconto calculadoraFaixaDesconto =
+                new CalculadoraDescontoTerceiraFaixa(
+                    new CalculadoraDescontoSegundaFaixa(
+                        new CalculadorDescontoPrimeiraFaixa(
+                            new SemDesconto(null))));
+        pedido = new Pedido(calculadoraFaixaDesconto);
     }
     
     @Test

@@ -26,8 +26,4 @@ public class ResumoPedido {
     public void setDesconto(double desconto) {
         this.desconto = desconto;
     }
-    
-    
-    
-    
 }
